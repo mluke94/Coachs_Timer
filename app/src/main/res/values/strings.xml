@@ -2,5 +2,6 @@
     <string name="app_name">Coachs_Timer</string>
     <string name="action_settings">Settings</string>
     <string name="timeVal">0:00:00</string>
-    <string name="milliVal">:0</string>
+    <string name="milliVal">:000</string>
+    <string name="Start">START</string>
 </resources>

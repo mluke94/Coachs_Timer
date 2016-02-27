@@ -12,13 +12,21 @@ import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity {
 
+    private LinearLayout timeDisplay;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        LinearLayout time_display = (LinearLayout)findViewById(R.id.linear_time_display);
+        timeDisplay = (TextField)findViewById(R.id.);
 
         setContentView(R.layout.activity_main);
     }
+
+    private Runnable updateTimerThread = new Runnable() {
+        public void run() {
+            //timer update logic here
+        }
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -40,5 +48,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    /*
+    Takes time in the form 0:00:00 and milli in the form :0
+     */
+    public updateMainTimer(String time, String milli) {
+
     }
 }
