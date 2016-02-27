@@ -17,6 +17,11 @@ public class Split implements Parcelable {
         split = new Time(s);
         total = new Time(t);
     }
+    public Split(long[] in) {
+        number = (short) in[0];
+        split = new Time(in[1]);
+        total = new Time(in[2]);
+    }
     public Split(String str) {
         // This constructor is use to load from a save file
         String[] parts = str.split("\\s");
@@ -55,4 +60,14 @@ public class Split implements Parcelable {
         }
     };
     // End required for Parcelling
+    public String toString() {
+        return String.valueOf(number) + "\t\t\t" + split + "\t\t\t" + total;
+    }
+    public Long[] getLongArray() {
+        Long[] data = new Long[3];
+        data[0] = (long) number;
+        data[1] = split.getTime();
+        data[2] = total.getTime();
+        return data;
+    }
 }
