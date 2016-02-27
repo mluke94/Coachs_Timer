@@ -1,26 +1,19 @@
 package hacks.coachs_timer;
 // Luke and Sam
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
-    private LinearLayout timeDisplay;
-    private TextView mainTime, milliTime;
+    MainView mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        setContentView(R.layout.activity_main);
+        mainView = new MainView(this);
+        setContentView(mainView);
     }
 
     private Runnable updateTimerThread = new Runnable() {
@@ -49,12 +42,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    /*
-    * Takes time in the form 0:00:00 and milli in the form :0
-    */
-    public updateMainTimer(String time, String milli) {
-
     }
 }
