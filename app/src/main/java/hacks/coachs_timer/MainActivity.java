@@ -2,31 +2,47 @@ package hacks.coachs_timer;
 // Luke and Sam
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
-    MainView mainView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainView = new MainView(this);
-        setContentView(mainView);
+        setContentView(R.layout.activity_main);
+
+        if(findViewById(R.id.fragment_container) != null) {
+            
+            if(savedInstanceState != null) {
+                return;
+            }
+
+            //new fragment
+            GroupTimerFragment groupFragment = new GroupTimerFragment();
+
+            //intent?
+
+            //Add fragment
+            getFragmentManager().beginTransaction().add(R.id.fragment_container, groupFragment).commit();
+        }
+
+        Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
+        setSupportActionBar(myToolbar);
     }
 
-    private Runnable updateTimerThread = new Runnable() {
+    /*private Runnable updateTimerThread = new Runnable() {
         public void run() {
             //timer update logic here
         }
     };
-
+*/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

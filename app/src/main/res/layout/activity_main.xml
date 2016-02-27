@@ -3,54 +3,26 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context="hacks.coachs_timer.MainActivity"
-    android:focusable="false">
+    android:focusable="false"
+    android:id="@+id/main_container">
 
-    <LinearLayout
-        android:orientation="vertical"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/my_toolbar"
+        android:layout_width="fill_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@android:style/Theme.DeviceDefault.Light.DarkActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/Main_View">
-
-        <LinearLayout
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:id="@+id/linear_time_display">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/timeVal"
-                android:id="@+id/textView"
-                android:layout_weight=".6"
-                android:textSize="@dimen/main_time_font_size"
-                android:textAlignment="textEnd" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/milliVal"
-                android:id="@+id/textView2"
-                android:layout_weight=".3"
-                android:textSize="@dimen/millisec_font" />
-
-        </LinearLayout>
-
-        <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listView"
-            android:layout_weight="1" />
-
-        <Button
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/Start"
-            android:id="@+id/button"
-            android:textSize="20dp" />
-    </LinearLayout>
-
+        android:id="@+id/fragment_container"
+        android:layout_below="@+id/my_toolbar"
+        android:layout_alignStart="@+id/my_toolbar"
+        android:layout_alignParentBottom="true"></RelativeLayout>
 </RelativeLayout>
