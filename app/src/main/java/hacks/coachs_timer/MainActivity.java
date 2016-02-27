@@ -9,15 +9,16 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
     private LinearLayout timeDisplay;
+    private TextView mainTime, milliTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        timeDisplay = (TextField)findViewById(R.id.);
 
         setContentView(R.layout.activity_main);
     }
@@ -51,8 +52,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /*
-    Takes time in the form 0:00:00 and milli in the form :0
-     */
+    * Takes time in the form 0:00:00 and milli in the form :0
+    */
     public updateMainTimer(String time, String milli) {
 
     }
