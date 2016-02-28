@@ -19,7 +19,6 @@ public class TimerList {
     private CopyOnWriteArrayList<Timer> timers;
     public TimerList() {
         timers = new CopyOnWriteArrayList<>();
-        timers.add(new Timer());
     }
 
 

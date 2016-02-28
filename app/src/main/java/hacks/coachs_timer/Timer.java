@@ -153,4 +153,10 @@ public class Timer implements Parcelable {
             return "";
         }
     }
+    public Time getTime() {
+        return time;
+    }
+    public Time getSplit() {
+        return split;
+    }
 }

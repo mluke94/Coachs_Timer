@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
                 groupFragment.setAdapter(tAdapt);
             }
         });
-        customHandler.postDelayed(updateTimerThread, 0);
+        customHandler.postDelayed(updateTimerThread,0);
     }
 
     // Create runnable that updates Timers
@@ -67,8 +67,11 @@ public class MainActivity extends AppCompatActivity {
             //timer update logic here
             long systemClock = SystemClock.uptimeMillis();
             tList.updateAll(systemClock);
-            tAdapt = new TimerAdapter(main, R.layout.timer_list_layout,tList.toArray());
-            groupFragment.setAdapter(tAdapt);
+            int[] visible = groupFragment.visibleRange();
+            for(int i = visible[0]; i <= visible[1]; i++) {
+                groupFragment.updateView(i,tList.getTimer(i));
+            }
+            groupFragment.updateOverallTime(systemClock);
             customHandler.postDelayed(this,0); //post action with no delay
         }
     };
@@ -97,17 +100,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void startAllTimers() {
         tList.startAll(SystemClock.uptimeMillis());
-        //customHandler.postDelayed(updateTimerThread,0);
     }
     public void startTimer(int index) {
         tList.getTimer(index).start(SystemClock.uptimeMillis());
-        customHandler.removeCallbacks(updateTimerThread);
-        customHandler.postDelayed(updateTimerThread,0);
     }
     public void stopTimer(int index) {
         tList.getTimer(index).stop();
-        customHandler.removeCallbacks(updateTimerThread);
-        customHandler.postDelayed(updateTimerThread,0);
     }
 
 }

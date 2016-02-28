@@ -2,11 +2,13 @@ package hacks.coachs_timer;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.ListView;
 import android.widget.TextView;
 
 /**
@@ -47,11 +49,25 @@ public class TimerAdapter extends ArrayAdapter {
             row.setOnTouchListener(new OnSwipeTouchListener(context) {
                 @Override
                 public void onSwipeRight() {
+                    if(view != null) {
+                        ListView lV = (ListView) view.getParent();
+                        int position = lV.getPositionForView(view);
+                        if(data[position].isRunning())
+                            data[position].stop();
+                        else
+                            data[position].start(SystemClock.uptimeMillis());
+                    }
                     System.out.println("Swipe right;): ");
                 }
 
                 @Override
                 public void onSwipeLeft() {
+                    if(view != null) {
+                        ListView lV = (ListView) view.getParent();
+                        int position = lV.getPositionForView(view);
+                        if (data[position].isRunning())
+                            data[position].splitAction();
+                    }
                     System.out.println("Swipe left)");
                 }
             });
@@ -70,9 +86,12 @@ public class TimerAdapter extends ArrayAdapter {
         return row;
     }
 
+    public Timer[] getData(){
+        return data;
+    }
+
     static class TimerHolder {
         TextView name,splitNum,totalTime,runningSplit,lastSplit;
         ImageButton reset,delete;
-
     }
 }
