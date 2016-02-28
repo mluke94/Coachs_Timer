@@ -89,6 +89,17 @@ public class Timer implements Parcelable {
         dest.writeBooleanArray(new boolean[] {started, stopSplit});
         dest.writeString(name);
     }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Timer createFromParcel(Parcel in) {
+            return new Timer(in);
+        }
+        public Timer[] newArray(int size) {
+            return new Timer[size];
+        }
+    }; // variable to be called that allows object to be parcelled
+    // End code required for Parcelling
+    
     public void start(long sysTime) {
         startTime = sysTime;
         started = true;
