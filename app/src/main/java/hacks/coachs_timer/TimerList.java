@@ -62,6 +62,7 @@ public class TimerList extends ArrayAdapter {
         holder.runningSplit.setText(timer.getRunningSplit());
         holder.lastSplit.setText(timer.getLastSplit());
 
+        System.out.print("get view reached");
         return row;
     }
 

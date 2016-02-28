@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        tList = new TimerList(this, R.id.timer_list);
+        tList = new TimerList(this, R.layout.timer_list_layout);
 
         //Add FAB
         fab = (ImageButton) findViewById(R.id.fab);
@@ -45,8 +45,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 // does all the things
-                tList.addTimer();
+
                 groupFragment.setAdapter(tList);
+                tList.addTimer();
                 System.out.println("Timer Added");
             }
         });
