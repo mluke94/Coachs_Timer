@@ -94,6 +94,11 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void startAllTimers() {
+        tList.startAll(SystemClock.uptimeMillis());
+        //customHandler.postDelayed(updateTimerThread,0);
+    }
     public void startTimer(int index) {
         tList.getTimer(index).start(SystemClock.uptimeMillis());
         customHandler.removeCallbacks(updateTimerThread);

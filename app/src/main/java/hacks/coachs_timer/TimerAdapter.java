@@ -44,6 +44,17 @@ public class TimerAdapter extends ArrayAdapter {
             //TODO: Add button listeners
 
             row.setTag(holder);
+            row.setOnTouchListener(new OnSwipeTouchListener(context) {
+                @Override
+                public void onSwipeRight() {
+                    System.out.println("Swipe right;): ");
+                }
+
+                @Override
+                public void onSwipeLeft() {
+                    System.out.println("Swipe left)");
+                }
+            });
         }
         else {
             holder = (TimerHolder)row.getTag();
@@ -62,5 +73,6 @@ public class TimerAdapter extends ArrayAdapter {
     static class TimerHolder {
         TextView name,splitNum,totalTime,runningSplit,lastSplit;
         ImageButton reset,delete;
+
     }
 }
