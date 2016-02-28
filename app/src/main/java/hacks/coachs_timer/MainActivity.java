@@ -2,6 +2,8 @@ package hacks.coachs_timer;
 // Luke and Sam
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -17,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
     TimerAdapter tAdapt;
     GroupTimerFragment groupFragment;
     MainActivity main = this;
+    private Handler customHandler = new Handler(); //Initialize and create a Handler
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +58,20 @@ public class MainActivity extends AppCompatActivity {
                 groupFragment.setAdapter(tAdapt);
             }
         });
-
-
+        customHandler.postDelayed(updateTimerThread, 0);
     }
 
-    /*private Runnable updateTimerThread = new Runnable() {
+    // Create runnable that updates Timers
+    private Runnable updateTimerThread = new Runnable() {
         public void run() {
             //timer update logic here
-            tAdapt = new TimerAdapter(main, R.id.timer_list, tList.toArray());
+            long systemClock = SystemClock.uptimeMillis();
+            tList.updateAll(systemClock);
+            tAdapt = new TimerAdapter(main, R.layout.timer_list_layout,tList.toArray());
             groupFragment.setAdapter(tAdapt);
+            customHandler.postDelayed(this,0); //post action with no delay
         }
-    };*/
+    };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -88,4 +94,15 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void startTimer(int index) {
+        tList.getTimer(index).start(SystemClock.uptimeMillis());
+        customHandler.removeCallbacks(updateTimerThread);
+        customHandler.postDelayed(updateTimerThread,0);
+    }
+    public void stopTimer(int index) {
+        tList.getTimer(index).stop();
+        customHandler.removeCallbacks(updateTimerThread);
+        customHandler.postDelayed(updateTimerThread,0);
+    }
+
 }
