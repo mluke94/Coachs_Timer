@@ -134,4 +134,7 @@ public class Timer implements Parcelable {
     public String getName() {
         return name;
     }
+    public boolean isRunning() {
+        return started;
+    }
 }
