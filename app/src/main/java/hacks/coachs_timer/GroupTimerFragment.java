@@ -21,4 +21,7 @@ public class GroupTimerFragment extends Fragment {
 
         return view;
     }
+    public void setAdapter(TimerList tl) {
+        timerList.setAdapter(tl);
+    }
 }

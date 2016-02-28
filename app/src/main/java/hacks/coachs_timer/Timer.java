@@ -158,7 +158,11 @@ public class Timer implements Parcelable {
         return split.toString();
     }
     public String getLastSplit() {
-        return splits.get(splits.size()-1).getSplit().toString();
+        if (splits.size() != 0) {
+            return splits.get(splits.size() - 1).getSplit().toString();
+        } else {
+            return "";
+        }
     }
 
 }

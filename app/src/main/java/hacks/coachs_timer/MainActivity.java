@@ -12,6 +12,7 @@ public class MainActivity extends AppCompatActivity {
 
     ImageButton fab;
     TimerList tList;
+    GroupTimerFragment groupFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //new fragment
-            GroupTimerFragment groupFragment = new GroupTimerFragment();
-
+            groupFragment = new GroupTimerFragment();
             //intent?
 
             //Add fragment
@@ -37,16 +37,20 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
+        tList = new TimerList(this, R.id.timer_list);
+
         //Add FAB
         fab = (ImageButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // does all the things
+                tList.addTimer();
+                groupFragment.setAdapter(tList);
+                System.out.println("Timer Added");
             }
         });
 
-        //Add TimerList
 
     }
 

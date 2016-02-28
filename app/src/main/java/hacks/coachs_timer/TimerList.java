@@ -25,6 +25,7 @@ public class TimerList extends ArrayAdapter {
         context = contextIn;
 
         timers = new CopyOnWriteArrayList<>();
+        timers.add(new Timer());
     }
 
 
@@ -69,7 +70,8 @@ public class TimerList extends ArrayAdapter {
         ImageButton reset,delete;
     }
 
-    public void addTimer(Timer tIn) {
+    public void addTimer() {
+        Timer tIn = new Timer();
         timers.add(tIn);
     }
     public void removeTimer(int i) {
