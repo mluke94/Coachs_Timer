@@ -70,4 +70,7 @@ public class Split implements Parcelable {
         data[2] = total.getTime();
         return data;
     }
+    public Time getSplit() {
+        return split;
+    }
 }
