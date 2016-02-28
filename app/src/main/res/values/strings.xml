@@ -4,4 +4,12 @@
     <string name="timeVal">0:00:00</string>
     <string name="milliVal">:000</string>
     <string name="Start">START</string>
+    <string name="TimerVal">0:00:00.</string>
+    <string name="SplitVal">0:00:00.</string>
+    <string name="TimerMil">000</string>
+    <string name="SplitMil">000</string>
+    <string name="StartButton">START</string>
+    <string name="LapButton">LAP</string>
+    <string name="ResetButton">RESET</string>
+    <string name="StopButton">STOP</string>
 </resources>

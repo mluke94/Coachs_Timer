@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -77,6 +78,9 @@ public class MainActivity extends AppCompatActivity {
                     visible[1]--;
                     break;
                 }
+                if (tList.getTimer(i).getExpand()) {
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                }
                 groupFragment.updateView(i,tList.getTimer(i));
             }
 
@@ -115,5 +119,4 @@ public class MainActivity extends AppCompatActivity {
     public void stopTimer(int index) {
         tList.getTimer(index).stop();
     }
-
 }

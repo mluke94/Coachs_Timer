@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="wrap_content"
+    android:layout_gravity="top|center_horizontal">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="1" >
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20sp"
+            android:paddingTop="20sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/TimerVal"
+                android:id="@+id/timerValue"
+                android:textSize="50sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/TimerMil"
+                android:id="@+id/timerMil"
+                android:textSize="25sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:paddingRight="20sp"
+            android:paddingBottom="15sp" >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/SplitVal"
+                android:id="@+id/splitValue"
+                android:textSize="60sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#000000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="@string/SplitMil"
+                android:id="@+id/splitMil"
+                android:textSize="30sp"
+                android:fontFamily="sans-serif-light"
+                android:textColor="#000000" />
+        </LinearLayout>
+
+        <ListView
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:id="@+id/listView"
+            android:paddingLeft="45dp"
+            android:layout_weight="1"
+            android:paddingRight="45dp"
+            android:smoothScrollbar="false"
+            android:transcriptMode="alwaysScroll"
+            android:focusable="false"
+            android:focusableInTouchMode="false" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:divider="@drawable/mydivider"
+            android:showDividers="middle"
+            android:dividerPadding="5dp" >
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/StartButton"
+                android:id="@+id/startButton"
+                android:layout_weight="0.5"
+                android:textSize="20sp"
+                android:minHeight="70dp"
+                android:textColor="#005c39" />
+
+            <Button
+                style="?android:attr/borderlessButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ResetButton"
+                android:id="@+id/splitButton"
+                android:layout_weight="0.5"
+                android:textSize="20sp"
+                android:minHeight="70dp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>
