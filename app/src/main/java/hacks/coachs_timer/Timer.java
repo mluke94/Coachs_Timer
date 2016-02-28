@@ -18,6 +18,7 @@ public class Timer implements Parcelable {
     private short splitNum; // current split number
     private boolean started; // is the timer running
     private boolean stopSplit; // does it split when stopped
+    private boolean delete = false;
     private long timeInMilliseconds; // Initialize and set to zero the time in milliseconds
     private long timeSwapBuff; // buffer time when paused
     private long updatedTime; // updated time for timer
@@ -158,5 +159,11 @@ public class Timer implements Parcelable {
     }
     public Time getSplit() {
         return split;
+    }
+    public void setDelete() {
+        delete = true;
+    }
+    public boolean getDelete() {
+        return delete;
     }
 }

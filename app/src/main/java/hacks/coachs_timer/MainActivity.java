@@ -66,13 +66,21 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             //timer update logic here
             long systemClock = SystemClock.uptimeMillis();
+            groupFragment.updateOverallTime(systemClock);
             tList.updateAll(systemClock);
             int[] visible = groupFragment.visibleRange();
             for(int i = visible[0]; i <= visible[1]; i++) {
+                if (tList.getTimer(i).getDelete()) {
+                    tList.removeTimer(i);
+                    tAdapt = new TimerAdapter(main, R.layout.timer_list_layout,tList.toArray());
+                    groupFragment.setAdapter(tAdapt);
+                    visible[1]--;
+                    break;
+                }
                 groupFragment.updateView(i,tList.getTimer(i));
             }
-            groupFragment.updateOverallTime(systemClock);
-            customHandler.postDelayed(this,0); //post action with no delay
+
+            customHandler.postDelayed(this, 0); //post action with no delay
         }
     };
 

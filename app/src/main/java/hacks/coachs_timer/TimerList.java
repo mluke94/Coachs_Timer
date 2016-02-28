@@ -64,4 +64,7 @@ public class TimerList {
         }
         return temp;
     }
+    public int size() {
+        return timers.size();
+    }
 }

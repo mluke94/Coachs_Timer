@@ -29,6 +29,15 @@ public class OnSwipeTouchListener implements OnTouchListener {
     public void onSwipeRight() {
     }
 
+    public void doubleTap() {
+    }
+
+    public void singleTap(){
+    }
+
+    public void longPress(){
+    }
+
     public boolean onTouch(View v, MotionEvent event) {
         view = v;
         return gestureDetector.onTouchEvent(event);
@@ -56,6 +65,24 @@ public class OnSwipeTouchListener implements OnTouchListener {
                 return true;
             }
             return false;
+        }
+
+        @Override
+        public boolean onDoubleTap(MotionEvent e) {
+            doubleTap();
+            return true;
+        }
+
+        @Override
+        public boolean onSingleTapConfirmed(MotionEvent e) {
+            singleTap();
+            return true;
+        }
+
+        @Override
+        public void onLongPress(MotionEvent e) {
+            longPress();
+            super.onLongPress(e);
         }
     }
 }

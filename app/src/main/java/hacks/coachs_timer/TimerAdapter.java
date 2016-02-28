@@ -8,7 +8,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 /**
@@ -42,7 +44,7 @@ public class TimerAdapter extends ArrayAdapter {
             holder.runningSplit = (TextView)row.findViewById(R.id.runningSplit);
             holder.lastSplit = (TextView)row.findViewById(R.id.lastSplit);
             holder.reset = (ImageButton)row.findViewById(R.id.resetButton);
-            holder.delete = (ImageButton)row.findViewById(R.id.imageButton);
+            holder.delete = (ImageButton)row.findViewById(R.id.deleteButton);
             //TODO: Add button listeners
 
             row.setTag(holder);
@@ -69,6 +71,44 @@ public class TimerAdapter extends ArrayAdapter {
                             data[position].splitAction();
                     }
                     System.out.println("Swipe left)");
+                }
+
+                @Override
+                public void doubleTap() {
+                    ImageButton resetButton = (ImageButton) view.findViewById(R.id.resetButton);
+                    ImageButton deleteButton = (ImageButton) view.findViewById(R.id.deleteButton);
+                    resetButton.setVisibility(View.VISIBLE);
+                    deleteButton.setVisibility(View.VISIBLE);
+                    resetButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LinearLayout ll = (LinearLayout) v.getParent();
+                            ListView lv = (ListView) ll.getParent();
+                            int position = lv.getPositionForView(ll);
+                            data[position].reset();
+                        }
+                    });
+                    deleteButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            LinearLayout ll = (LinearLayout) v.getParent();
+                            ListView lv = (ListView) ll.getParent();
+                            int position = lv.getPositionForView(ll);
+                            data[position].setDelete();
+                        }
+                    });
+                    System.out.println("Double Tap");
+                }
+
+                @Override
+                public void singleTap() {
+                    ImageButton resetButton = (ImageButton) view.findViewById(R.id.resetButton);
+                    ImageButton deleteButton = (ImageButton) view.findViewById(R.id.deleteButton);
+                    resetButton.setVisibility(View.INVISIBLE);
+                    deleteButton.setVisibility(View.INVISIBLE);
+                    resetButton.setOnClickListener(null);
+                    deleteButton.setOnClickListener(null);
+                    System.out.println("Single Tap");
                 }
             });
         }
