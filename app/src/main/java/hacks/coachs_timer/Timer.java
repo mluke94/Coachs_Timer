@@ -137,4 +137,17 @@ public class Timer implements Parcelable {
     public boolean isRunning() {
         return started;
     }
+    public String getSplitNumber() {
+        return splitNum;
+    }
+    public String getTotalTime() {
+        return time.toString();
+    }
+    public String getRunningSplit() {
+        return split.toString();
+    }
+    public String getLastSplit() {
+        return splits.get(split.size()-1).getSplit();
+    }
+
 }
