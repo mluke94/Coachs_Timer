@@ -5,8 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageButton;
 
 public class MainActivity extends AppCompatActivity {
+
+    ImageButton fab;
+    TimerList tList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +36,18 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
+
+        //Add FAB
+        fab = (ImageButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // does all the things
+            }
+        });
+
+        //Add TimerList
+
     }
 
     /*private Runnable updateTimerThread = new Runnable() {
