@@ -15,60 +15,13 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Created by Sam on 2/27/2016.
  */
-public class TimerList extends ArrayAdapter {
+public class TimerList {
     private CopyOnWriteArrayList<Timer> timers;
-    private int layoutResourceId;
-    private Context context;
-    public TimerList(Context contextIn, int layoutResourceIdIn) {
-        super(contextIn,layoutResourceIdIn);
-        layoutResourceId = layoutResourceIdIn;
-        context = contextIn;
-
+    public TimerList() {
         timers = new CopyOnWriteArrayList<>();
         timers.add(new Timer());
     }
 
-
-
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View row = convertView;
-        TimerHolder holder = null;
-
-        if(row == null) {
-            LayoutInflater inflater = ((Activity)context).getLayoutInflater();
-            row = inflater.inflate(layoutResourceId, parent, false);
-
-            holder = new TimerHolder();
-            holder.name = (TextView)row.findViewById(R.id.name);
-            holder.splitNum = (TextView)row.findViewById(R.id.textView3);
-            holder.totalTime = (TextView)row.findViewById(R.id.totalTime);
-            holder.runningSplit = (TextView)row.findViewById(R.id.runningSplit);
-            holder.lastSplit = (TextView)row.findViewById(R.id.lastSplit);
-            holder.reset = (ImageButton)row.findViewById(R.id.resetButton);
-            holder.delete = (ImageButton)row.findViewById(R.id.imageButton);
-            //TODO: Add button listeners
-
-            row.setTag(holder);
-        }
-        else {
-            holder = (TimerHolder)row.getTag();
-        }
-
-        Timer timer = getTimer(position);
-        holder.name.setText(timer.getName());
-        holder.splitNum.setText(timer.getSplitNumber());
-        holder.totalTime.setText(timer.getTotalTime());
-        holder.runningSplit.setText(timer.getRunningSplit());
-        holder.lastSplit.setText(timer.getLastSplit());
-
-        return row;
-    }
-
-    static class TimerHolder {
-        TextView name,splitNum,totalTime,runningSplit,lastSplit;
-        ImageButton reset,delete;
-    }
 
     public void addTimer() {
         Timer tIn = new Timer();
@@ -103,5 +56,13 @@ public class TimerList extends ArrayAdapter {
     }
     public Timer getTimer(int index) {
         return timers.get(index);
+    }
+    public Timer[] toArray() {
+        int l = timers.size();
+        Timer[] temp = new Timer[l];
+        for (int i = 0; i < l; i++) {
+            temp[i] = timers.get(i);
+        }
+        return temp;
     }
 }

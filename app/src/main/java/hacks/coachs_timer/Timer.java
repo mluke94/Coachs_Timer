@@ -164,5 +164,4 @@ public class Timer implements Parcelable {
             return "";
         }
     }
-
 }

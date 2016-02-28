@@ -1,5 +1,6 @@
 package hacks.coachs_timer;
 // Luke and Sam
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -7,12 +8,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
     ImageButton fab;
     TimerList tList;
+    TimerAdapter tAdapt;
     GroupTimerFragment groupFragment;
+    MainActivity main = this;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
         Toolbar myToolbar = (Toolbar)findViewById(R.id.my_toolbar);
         setSupportActionBar(myToolbar);
 
-        tList = new TimerList(this, R.id.timer_list);
+        tList = new TimerList();
+        tAdapt = new TimerAdapter(main, R.layout.timer_list_layout,tList.toArray());
 
         //Add FAB
         fab = (ImageButton) findViewById(R.id.fab);
@@ -46,8 +51,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 // does all the things
                 tList.addTimer();
-                groupFragment.setAdapter(tList);
-                System.out.println("Timer Added");
+                tAdapt = new TimerAdapter(main, R.layout.timer_list_layout,tList.toArray());
+                groupFragment.setAdapter(tAdapt);
             }
         });
 
@@ -57,9 +62,11 @@ public class MainActivity extends AppCompatActivity {
     /*private Runnable updateTimerThread = new Runnable() {
         public void run() {
             //timer update logic here
+            tAdapt = new TimerAdapter(main, R.id.timer_list, tList.toArray());
+            groupFragment.setAdapter(tAdapt);
         }
-    };
-*/
+    };*/
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
