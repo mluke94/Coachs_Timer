@@ -24,5 +24,6 @@
         android:id="@+id/fragment_container"
         android:layout_below="@+id/my_toolbar"
         android:layout_alignStart="@+id/my_toolbar"
-        android:layout_alignParentBottom="true"></RelativeLayout>
+        android:layout_alignParentBottom="true"/>
+
 </RelativeLayout>

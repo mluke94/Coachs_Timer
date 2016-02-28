@@ -14,7 +14,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         if(findViewById(R.id.fragment_container) != null) {
-            
+
+
             if(savedInstanceState != null) {
                 return;
             }
