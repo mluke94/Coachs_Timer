@@ -2,11 +2,13 @@ package hacks.coachs_timer;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
 
 /**
  * Created by LukeM on 2/27/2016.
@@ -14,12 +16,15 @@ import android.widget.ListView;
 public class GroupTimerFragment extends Fragment {
     ListView timerList;
     Button startButton;
+    Timer overallTimer;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.group_timer_layout, container, false);
         timerList = (ListView) view.findViewById(R.id.timer_list);
         startButton = (Button) view.findViewById(R.id.start_button);
+        overallTimer = new Timer();
 
         return view;
         }
@@ -31,6 +36,10 @@ public class GroupTimerFragment extends Fragment {
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(overallTimer.isRunning())
+                    overallTimer.stop();
+                else
+                    overallTimer.start(SystemClock.uptimeMillis());
                 System.out.println("Clicked");
             }
         });
@@ -54,5 +63,27 @@ public class GroupTimerFragment extends Fragment {
 
     public void setAdapter(TimerAdapter tl) {
         timerList.setAdapter(tl);
+    }
+    public void updateView(int index, Timer t) {
+        View v = timerList.getChildAt(index - timerList.getFirstVisiblePosition());
+        if(v == null){
+            return;
+        }
+
+        TextView name = (TextView) v.findViewById(R.id.name);
+        TextView splitNum = (TextView) v.findViewById(R.id.textView3);
+        TextView totalTime = (TextView) v.findViewById(R.id.totalTime);
+        TextView runningSplit = (TextView) v.findViewById(R.id.runningSplit);
+        TextView lastSplit = (TextView) v.findViewById(R.id.lastSplit);
+
+        name.setText(t.getName());
+        splitNum.setText(t.getSplitNumber());
+        totalTime.setText(t.getTotalTime());
+        runningSplit.setText(t.getRunningSplit());
+        lastSplit.setText(t.getLastSplit());
+    }
+    public int[] visibleRange() {
+        int[] ans = {timerList.getFirstVisiblePosition(), timerList.getLastVisiblePosition()};
+        return ans;
     }
 }
