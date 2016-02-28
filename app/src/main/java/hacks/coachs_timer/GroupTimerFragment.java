@@ -16,7 +16,7 @@ public class GroupTimerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.group_timer_layout, container, false);
-        timerList = view.findViewById(R.id.timer_list);
+        timerList = (ListView)view.findViewById(R.id.timer_list);
 
 
         return view;

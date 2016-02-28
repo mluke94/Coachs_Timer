@@ -149,7 +149,7 @@ public class Timer implements Parcelable {
         return started;
     }
     public String getSplitNumber() {
-        return splitNum;
+        return Short.toString(splitNum);
     }
     public String getTotalTime() {
         return time.toString();
@@ -158,7 +158,7 @@ public class Timer implements Parcelable {
         return split.toString();
     }
     public String getLastSplit() {
-        return splits.get(split.size()-1).getSplit();
+        return splits.get(splits.size()-1).getSplit().toString();
     }
 
 }
