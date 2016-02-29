@@ -6,4 +6,4 @@
     android:textAppearance="?android:attr/textAppearanceMedium"
     android:gravity="center"
     android:minHeight="45dp"
- />
+    android:textColor="#000000" />
