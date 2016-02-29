@@ -45,9 +45,11 @@ public class GroupTimerFragment extends Fragment {
                 else {
                     overallTimer.start(sysClock);
                     TimerAdapter tA = (TimerAdapter) timerList.getAdapter();
-                    Timer[] data = tA.getData();
-                    for (Timer t : data) {
-                        t.start(sysClock);
+                    if (tA.getCount() > 0) {
+                        Timer[] data = tA.getData();
+                        for (Timer t : data) {
+                            t.start(sysClock);
+                        }
                     }
                 }
                 System.out.println("Clicked");
@@ -93,8 +95,7 @@ public class GroupTimerFragment extends Fragment {
         lastSplit.setText(t.getLastSplit());
     }
     public int[] visibleRange() {
-        int[] ans = {timerList.getFirstVisiblePosition(), timerList.getLastVisiblePosition()};
-        return ans;
+        return new int[] {timerList.getFirstVisiblePosition(), timerList.getLastVisiblePosition()};
     }
     public void updateOverallTime(long sysTime) {
         if(overallTimer.isRunning()) {
