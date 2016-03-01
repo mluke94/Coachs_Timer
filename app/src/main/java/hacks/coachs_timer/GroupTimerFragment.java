@@ -45,14 +45,13 @@ public class GroupTimerFragment extends Fragment {
                 else {
                     overallTimer.start(sysClock);
                     TimerAdapter tA = (TimerAdapter) timerList.getAdapter();
-                    if (tA.getCount() > 0) {
+                    if (tA != null) {
                         Timer[] data = tA.getData();
                         for (Timer t : data) {
                             t.start(sysClock);
                         }
                     }
                 }
-                System.out.println("Clicked");
             }
         });
 

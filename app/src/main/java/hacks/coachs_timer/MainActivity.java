@@ -1,10 +1,11 @@
 package hacks.coachs_timer;
 // Luke and Sam
 import android.app.Activity;
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.SystemClock;
-import android.support.v4.app.FragmentManager;
+import android.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     TimerList tList;
     TimerAdapter tAdapt;
     GroupTimerFragment groupFragment;
+    SingleTimerFragment singleFragment;
     MainActivity main = this;
     private Handler customHandler = new Handler(); //Initialize and create a Handler
 
@@ -36,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
 
             //new fragment
             groupFragment = new GroupTimerFragment();
+            singleFragment = new SingleTimerFragment();
             //intent?
 
             //Add fragment
@@ -67,21 +70,33 @@ public class MainActivity extends AppCompatActivity {
         public void run() {
             //timer update logic here
             long systemClock = SystemClock.uptimeMillis();
-            groupFragment.updateOverallTime(systemClock);
             tList.updateAll(systemClock);
-            int[] visible = groupFragment.visibleRange();
-            for(int i = visible[0]; i <= visible[1]; i++) {
-                if (tList.getTimer(i).getDelete()) {
-                    tList.removeTimer(i);
-                    tAdapt = new TimerAdapter(main, R.layout.timer_list_layout,tList.toArray());
-                    groupFragment.setAdapter(tAdapt);
-                    visible[1]--;
-                    break;
+            if (groupFragment.isVisible()) {
+                groupFragment.updateOverallTime(systemClock);
+                int[] visible = groupFragment.visibleRange();
+                for (int i = visible[0]; i <= visible[1]; i++) {
+                    if (tList.getTimer(i).getDelete()) {
+                        tList.removeTimer(i);
+                        tAdapt = new TimerAdapter(main, R.layout.timer_list_layout, tList.toArray());
+                        groupFragment.setAdapter(tAdapt);
+                        visible[1]--;
+                        break;
+                    }
+                    if (tList.getTimer(i).getExpand()) {
+                        FragmentTransaction transition = getFragmentManager().beginTransaction();
+                        singleFragment.setTimer(tList.getTimer(i));
+                        transition.replace(R.id.fragment_container, singleFragment);
+                        transition.addToBackStack(null);
+                        transition.commit();
+                    }
+                    groupFragment.updateView(i, tList.getTimer(i));
                 }
-                if (tList.getTimer(i).getExpand()) {
-                    FragmentManager fragmentManager = getSupportFragmentManager();
+            } else if (singleFragment.isVisible()) {
+                if (singleFragment.getTimer().getExpand()) {
+                    singleFragment.getTimer().setExpand(false);
+                    singleFragment.setAdapter();
                 }
-                groupFragment.updateView(i,tList.getTimer(i));
+                singleFragment.update(systemClock);
             }
 
             customHandler.postDelayed(this, 0); //post action with no delay
@@ -108,6 +123,15 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getFragmentManager().getBackStackEntryCount() == 0) {
+            this.finish();
+        } else {
+            getFragmentManager().popBackStack();
+        }
     }
 
     public void startAllTimers() {

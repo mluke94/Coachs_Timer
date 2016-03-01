@@ -110,6 +110,16 @@ public class TimerAdapter extends ArrayAdapter {
                     deleteButton.setOnClickListener(null);
                     System.out.println("Single Tap");
                 }
+
+                @Override
+                public void longPress() {
+                    if(view != null) {
+                        ListView lV = (ListView) view.getParent();
+                        int position = lV.getPositionForView(view);
+                        data[position].setExpand(true);
+                    }
+                    System.out.println("Long Press");
+                }
             });
         }
         else {
