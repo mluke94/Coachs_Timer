@@ -16,7 +16,7 @@ import android.widget.TextView;
 public class GroupTimerFragment extends Fragment {
     ListView timerList;
     Button startButton;
-    Timer overallTimer;
+    Timer overallTimer = new Timer();
     TextView overallTime;
     TextView overallMilli;
 
@@ -26,7 +26,7 @@ public class GroupTimerFragment extends Fragment {
         View view = inflater.inflate(R.layout.group_timer_layout, container, false);
         timerList = (ListView) view.findViewById(R.id.timer_list);
         startButton = (Button) view.findViewById(R.id.start_button);
-        overallTimer = new Timer();
+
         overallTime = (TextView) view.findViewById(R.id.overallTimer);
         overallMilli = (TextView) view.findViewById(R.id.overallMilli);
         return view;

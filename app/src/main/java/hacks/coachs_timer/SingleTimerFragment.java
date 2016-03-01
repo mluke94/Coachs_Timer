@@ -78,12 +78,6 @@ public class SingleTimerFragment extends Fragment {
         });
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        c = context;
-    }
-
     public void setTimer(Timer t) {
         currentTimer = t;
         //add split adapter and update
@@ -98,15 +92,19 @@ public class SingleTimerFragment extends Fragment {
     public void update(long sysTime) {
         if (currentTimer.isRunning()) {
             currentTimer.update(sysTime);
-        }
             Time t = currentTimer.getTime();
             Time s = currentTimer.getSplit();
             totalTime.setText(t.timeString());
             totalMilli.setText(t.milString());
             splitTime.setText(s.timeString());
             splitMilli.setText(s.milString());
+        }
     }
     public Timer getTimer() {
         return currentTimer;
+    }
+
+    public void setContext(Context context) {
+        c = context;
     }
 }

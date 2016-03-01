@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
             //new fragment
             groupFragment = new GroupTimerFragment();
             singleFragment = new SingleTimerFragment();
+            singleFragment.setContext(this);
             //intent?
 
             //Add fragment
@@ -62,6 +63,10 @@ public class MainActivity extends AppCompatActivity {
                 groupFragment.setAdapter(tAdapt);
             }
         });
+
+        final int abTitleId = getResources().getIdentifier("action_bar_title", "id", "android");
+        System.out.println(abTitleId);
+
         customHandler.postDelayed(updateTimerThread,0);
     }
 
@@ -95,6 +100,7 @@ public class MainActivity extends AppCompatActivity {
                 if (singleFragment.getTimer().getExpand()) {
                     singleFragment.getTimer().setExpand(false);
                     singleFragment.setAdapter();
+                    setTitle(singleFragment.getTimer().getName());
                 }
                 singleFragment.update(systemClock);
             }
@@ -130,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
         if (getFragmentManager().getBackStackEntryCount() == 0) {
             this.finish();
         } else {
+            setTitle("Coach's Timer");
             getFragmentManager().popBackStack();
         }
     }
